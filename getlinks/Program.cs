@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using AngleSharp;
 
 namespace getlinks
 {
@@ -10,6 +8,10 @@ namespace getlinks
     {
         static void Main(string[] args)
         {
+            var url = args[0];
+            var config = Configuration.Default.WithDefaultLoader();
+            var document = BrowsingContext.New(config).OpenAsync(url);
+
         }
     }
 }
