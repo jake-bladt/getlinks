@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 
 using AngleSharp;
+using AngleSharp.Dom;
 
 namespace getlinks
 {
@@ -10,10 +12,13 @@ namespace getlinks
         {
             var url = args[0];
             var config = Configuration.Default.WithDefaultLoader();
-            var document = BrowsingContext.New(config).OpenAsync(url);
-            document.Start();
-            document.Wait();
+            var documentTask = BrowsingContext.New(config).OpenAsync(url);
+            documentTask.RunSynchronously();
 
+            var document = documentTask.Result;
+
+            var links = for element in document.All
+                select element;
 
             Console.ReadLine();
         }
