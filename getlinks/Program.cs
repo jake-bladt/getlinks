@@ -11,7 +11,11 @@ namespace getlinks
             var url = args[0];
             var config = Configuration.Default.WithDefaultLoader();
             var document = BrowsingContext.New(config).OpenAsync(url);
+            document.Start();
+            document.Wait();
 
+
+            Console.ReadLine();
         }
     }
 }
